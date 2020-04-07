@@ -1,0 +1,16 @@
+---
+- name: add forward server
+  command: "{{ splunk.exec }} add forward-server {{ splunk.master }}:{{ splunk.forwarder_port }} -auth admin:Tr0nRul3z@1$$CPT"
+  become: yes
+
+- name: add deploy server
+  command: "{{ splunk.exec }} set deploy-poll {{ splunk.master }}:{{ splunk.mgmt_port }} -auth admin:Tr0nRul3z@1$$CPT"
+  become: yes
+
+- name: add inputs.conf file
+  copy:
+    src: files/inputs.conf
+    dest: /opt/splunkforwarder/etc/system/local/inputs.conf
+
+- name: restart forwarder
+  command: "{{ splunk.exec }} restart"

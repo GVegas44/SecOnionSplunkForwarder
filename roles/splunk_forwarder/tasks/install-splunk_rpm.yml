@@ -1,0 +1,42 @@
+---
+# copy and install splunk rpm
+
+  - name: create splunk work directory
+    file:
+      path: "{{ splunk.work_dir }}"
+      state: directory
+      mode: 0700
+    tags: install
+
+  - name: copy splunk package to work directory
+    copy:
+      src: "files/{{ splunk.forwarder_pkg }}"
+      dest: "{{ splunk.work_dir }}/{{ splunk.forwarder_pkg }}"
+      mode: 0644
+    tags: install
+
+#  - name: verify file copied correctly (sha256)
+#    stat:
+#      path: "{{ splunk.work_dir }}/{{ splunk.pkg }}"
+#      checksum_algorithm: sha256
+#    register: hash
+#    tags: install
+#
+#  - debug:
+#      msg: "SHA256 Checksum: Good"
+#    when: "hash.stat.checksum|string in splunk.pkg_hash"
+#    tags: install
+#
+  - name: install splunk package
+    command: "tar xvzf {{ splunk.work_dir }}/{{ splunk.forwarder_pkg }} -C /opt"
+    tags: install
+
+#  - name: set splunk directory ownership
+#    file:
+#      path: /opt/splunkforwarder
+#      state: directory
+#      recurse: yes
+#      owner: splunk
+#      group: splunk
+#    tags: install
+

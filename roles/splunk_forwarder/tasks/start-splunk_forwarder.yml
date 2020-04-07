@@ -1,0 +1,9 @@
+---
+#
+- name: start Splunkd
+  command: /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --no-prompt
+
+- name: wait for forwarder to start
+  wait_for:
+    port: "{{ splunk.mgmt_port }}"
+    delay: 5

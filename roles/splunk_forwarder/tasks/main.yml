@@ -1,0 +1,6 @@
+---
+# tasks file for splunk_fowarder
+- include_tasks: install-splunk_rpm.yml
+- include_tasks: install-user_seed.yml
+- include_tasks: start-splunk_forwarder.yml
+- include_tasks: config-splunk_forwarder.yml
