@@ -1,0 +1,28 @@
+---
+
+host:
+    work_dir: "/ansible/155cpt"
+
+ansible:
+    user: "tron"
+    usergroup: "tron"
+    sudogroup: "sudo"
+    sudoer: "tron"
+
+splunk:
+    opt: &opt "/opt"
+    user: "splunk"
+    group: "splunk"
+    home: "/opt/splunkforwarder"
+    exec: "/opt/splunkforwarder/bin/splunk"
+    admin_user: admin
+    password: "Tr0nRul3z@1$$CPT"
+    secret: "Tr0nRul3z@1$$CPT"
+    pass4SymmKey: "Tr0nRul3z@1$$CPT"
+    work_dir: "/tmpfiles/splunk"
+    forwarder_pkg: "splunkforwarder-8.0.3-a6754d8441bf-Linux-x86_64.tgz"
+    forwarder_port: 9997
+    mgmt_port: 8089
+    ssl_dir: splunk_tron
+    service_name: "ufw"
+    master: "10.0.40.210"

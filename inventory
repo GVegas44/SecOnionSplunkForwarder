@@ -1,0 +1,6 @@
+[all:vars]
+ansible_user=tron
+
+[seconion]
+sensor ansible_host=10.0.40.36
+

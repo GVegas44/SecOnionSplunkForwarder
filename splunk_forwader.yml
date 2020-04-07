@@ -1,0 +1,5 @@
+---
+-  import_playbook: playbooks/user_provision.yml
+-  import_playbook: playbooks/deploy-splunk_forwarder.yml
+...
+

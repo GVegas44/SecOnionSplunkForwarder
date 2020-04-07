@@ -1,0 +1,11 @@
+---
+- hosts: seconion 
+  gather_facts: false
+  vars:
+    ansible_connection: ssh
+    ansible_user: defender 
+    ansible_ssh_pass: Tr0nRul3z@1$$CPT
+    ansible_become_pass: Tr0nRul3z@1$$CPT
+  become: yes
+  roles:
+    - user_provision

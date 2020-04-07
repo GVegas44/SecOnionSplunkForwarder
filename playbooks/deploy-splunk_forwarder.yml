@@ -1,0 +1,5 @@
+# deploy and configure standalone node
+- hosts: seconion
+  become: yes
+  roles:
+    - splunk_forwarder
