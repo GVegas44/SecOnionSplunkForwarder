@@ -5,36 +5,18 @@
   become: yes
   become_user: root
 
-  vars:
-    splunk_pkg: splunk
-
   tasks:
-    - name: stop splunkd service
-      systemd:
-        name: "{{ splunk.service_name }}"
-        state: stopped
-
-    - name: disable Splunkd service
-      systemd:
-        name: "{{ splunk.service_name }}"
-        enabled: no
-
-    - name: uninstall splunk package
-      yum:
-        name: "{{ splunk_pkg }}"
-        state: absent
-
     - name: remove splunk directory
       file:
-        path: "{{ splunk.home }}" 
+        path: "{{ splunk.home }}"
         state: absent
 
-    - name: remove splunk systemd unit files
-      file:
-        path: "/etc/systemd/system/{{ splunk.service_name }}.service"
-        state: absent
+    - name: get pids of splunkd
+      ignore_errors: yes
+      shell: "ps -aux | grep splunkd | grep -v color | awk '{print $2}'"
+      register: splunkd_pids
 
-    - name: reload systemd
-      systemd:
-        daemon_reload: yes 
-
+    - name: kill splunkd pids
+      ignore_errors: yes
+      shell: "kill -9 {{ item }}"
+      with_items: "{{ splunkd_pids.stdout_lines }}"

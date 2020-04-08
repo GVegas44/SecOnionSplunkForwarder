@@ -1,10 +1,11 @@
 ---
 - name: add forward server
-  command: "{{ splunk.exec }} add forward-server {{ splunk.master }}:{{ splunk.forwarder_port }} -auth admin:Tr0nRul3z@1$$CPT"
+  command: "{{ splunk.exec }} add forward-server {{ splunk.master }}:{{ splunk.forwarder_port }} -auth 
+  {{ splunk.admin_user }}:{{ splunk.password }}"  
   become: yes
 
 - name: add deploy server
-  command: "{{ splunk.exec }} set deploy-poll {{ splunk.master }}:{{ splunk.mgmt_port }} -auth admin:Tr0nRul3z@1$$CPT"
+  command: "{{ splunk.exec }} set deploy-poll {{ splunk.master }}:{{ splunk.mgmt_port }} -auth {{ splunk.admin_user }}:{{ splunk.password }}"
   become: yes
 
 - name: add inputs.conf file

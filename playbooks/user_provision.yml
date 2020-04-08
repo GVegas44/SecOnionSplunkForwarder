@@ -4,8 +4,8 @@
   vars:
     ansible_connection: ssh
     ansible_user: defender 
-    ansible_ssh_pass: Tr0nRul3z@1$$CPT
-    ansible_become_pass: Tr0nRul3z@1$$CPT
+    ansible_ssh_pass: "{{ ansible.password }}"
+    ansible_become_pass: "{{ ansible.password }}"
   become: yes
   roles:
     - user_provision
